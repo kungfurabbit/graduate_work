@@ -5,11 +5,26 @@
  */
 package View;
 
+import Controller.DBController;
+import Model.Tags;
 import java.awt.Color;
 import java.awt.Dimension;
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
+import java.util.Date;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -18,16 +33,23 @@ import javax.swing.JLabel;
 public class ManagerTools extends javax.swing.JFrame {
 int xx;
 int yy;
+DBController db;
+Tags tag;
+protected  int studentId = 0;
     /**
      * Creates new form ManagerTools
      */
     public ManagerTools() {
         initComponents();     
-               pnl_new_group_1.setVisible(true);  
-               pnl_new_group_2.setVisible(false);  
-
+               pnl_new_group_1.setVisible(false);  
+               pnl_new_group_2.setVisible(false); 
+               db = new DBController();
+               tag = new Tags();
+               setValueToTableStudent();
     }
-
+private void setValueToTableStudent(){
+     table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));     
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +76,10 @@ int yy;
         jSeparator7 = new javax.swing.JSeparator();
         pnl_menu = new javax.swing.JLayeredPane();
         pnl_student = new javax.swing.JPanel();
+        pnl_header4 = new javax.swing.JPanel();
+        lbl_exit_5 = new javax.swing.JLabel();
+        lbl_logo4 = new javax.swing.JLabel();
+        lbl_logoName4 = new javax.swing.JLabel();
         jgroup1 = new javax.swing.JLayeredPane();
         pnl_new_student = new javax.swing.JPanel();
         txt_header32 = new javax.swing.JLabel();
@@ -65,24 +91,20 @@ int yy;
         pnl_cmd_add29 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_student_last_name = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
-        jTextField3 = new javax.swing.JTextField();
+        txt_student_name = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane29 = new javax.swing.JScrollPane();
-        jTable29 = new javax.swing.JTable();
+        table_student = new javax.swing.JTable();
         txt_header30 = new javax.swing.JLabel();
         jSeparator119 = new javax.swing.JSeparator();
-        txt_gorup_search1 = new javax.swing.JTextField();
+        txt_search_student = new javax.swing.JTextField();
         lbl_cmd_search_gorup1 = new javax.swing.JLabel();
-        pnl_header4 = new javax.swing.JPanel();
-        lbl_exit_5 = new javax.swing.JLabel();
-        lbl_logo4 = new javax.swing.JLabel();
-        lbl_logoName4 = new javax.swing.JLabel();
         pnl_group = new javax.swing.JPanel();
         pnl_header = new javax.swing.JPanel();
         lbl_exit_1 = new javax.swing.JLabel();
@@ -138,7 +160,6 @@ int yy;
         choiceDescipline = new java.awt.Choice();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(54, 63, 73));
         setLocationByPlatform(true);
         setUndecorated(true);
@@ -289,7 +310,7 @@ int yy;
                 .addComponent(menu_item_1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(menu_item_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -306,9 +327,62 @@ int yy;
             }
         });
 
+        pnl_header4.setBackground(new java.awt.Color(0, 157, 65));
+        pnl_header4.setPreferredSize(new java.awt.Dimension(453, 206));
+
+        lbl_exit_5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_exit_5.setForeground(new java.awt.Color(57, 113, 177));
+        lbl_exit_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/1495903985_Gnome-Window-Close-32.png"))); // NOI18N
+        lbl_exit_5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_exit_5MouseClicked(evt);
+            }
+        });
+
+        lbl_logo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/1495925307_SEO_WEB_analytics.png"))); // NOI18N
+
+        lbl_logoName4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lbl_logoName4.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_logoName4.setText("AnalyticToo");
+
+        javax.swing.GroupLayout pnl_header4Layout = new javax.swing.GroupLayout(pnl_header4);
+        pnl_header4.setLayout(pnl_header4Layout);
+        pnl_header4Layout.setHorizontalGroup(
+            pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_header4Layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(lbl_logo4)
+                .addGap(18, 18, 18)
+                .addComponent(lbl_logoName4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_exit_5)
+                .addGap(21, 21, 21))
+        );
+        pnl_header4Layout.setVerticalGroup(
+            pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_header4Layout.createSequentialGroup()
+                .addGroup(pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_header4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_exit_5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_header4Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_header4Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(lbl_logoName4))
+                            .addComponent(lbl_logo4, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
         jgroup1.setLayout(new javax.swing.OverlayLayout(jgroup1));
 
         pnl_new_student.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_new_student.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_new_studentMouseClicked(evt);
+            }
+        });
 
         txt_header32.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_header32.setForeground(new java.awt.Color(34, 41, 50));
@@ -324,6 +398,11 @@ int yy;
 
         pnl_cmd_clear29.setBackground(new java.awt.Color(255, 255, 255));
         pnl_cmd_clear29.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+        pnl_cmd_clear29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_cmd_clear29MouseClicked(evt);
+            }
+        });
 
         jLabel68.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel68.setForeground(new java.awt.Color(0, 157, 65));
@@ -332,6 +411,11 @@ int yy;
 
         pnl_cmd_add29.setBackground(new java.awt.Color(255, 255, 255));
         pnl_cmd_add29.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+        pnl_cmd_add29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_cmd_add29MouseClicked(evt);
+            }
+        });
 
         jLabel69.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel69.setForeground(new java.awt.Color(0, 157, 65));
@@ -361,17 +445,43 @@ int yy;
 
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setText("Фамилия");
-        jTextField2.setBorder(null);
+        txt_student_last_name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_student_last_name.setText("Фамилия");
+        txt_student_last_name.setBorder(null);
+        txt_student_last_name.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_student_last_nameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_student_last_nameFocusLost(evt);
+            }
+        });
+        txt_student_last_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_student_last_nameActionPerformed(evt);
+            }
+        });
 
         jSeparator3.setBackground(new java.awt.Color(0, 157, 65));
 
         jSeparator9.setBackground(new java.awt.Color(0, 157, 65));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField3.setText("Имя");
-        jTextField3.setBorder(null);
+        txt_student_name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_student_name.setText("Имя");
+        txt_student_name.setBorder(null);
+        txt_student_name.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_student_nameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_student_nameFocusLost(evt);
+            }
+        });
+        txt_student_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_student_nameActionPerformed(evt);
+            }
+        });
 
         jSeparator10.setBackground(new java.awt.Color(0, 157, 65));
 
@@ -379,6 +489,50 @@ int yy;
         jLabel13.setText("Дата рождения");
 
         dateChooserCombo1.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
+            new datechooser.view.appearance.ViewAppearance("a",
+                new datechooser.view.appearance.custom.CustomCellAppearance(new java.awt.Color(0, 191, 52),
+                    new java.awt.Color(0, 0, 0),
+                    javax.swing.BorderFactory.createSoftBevelBorder(javax.swing.border.BevelBorder.RAISED,
+                        (java.awt.Color)null,
+                        (java.awt.Color)null,
+                        (java.awt.Color)null,
+                        (java.awt.Color)null),
+                    new java.awt.Font("Serif", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(0, 0, 153),
+                    1.0f),
+                new datechooser.view.appearance.custom.CustomCellAppearance(new java.awt.Color(153, 153, 255),
+                    new java.awt.Color(0, 0, 0),
+                    (javax.swing.border.Border)null,
+                    new java.awt.Font("Serif", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(0, 0, 102),
+                    1.0f),
+                new datechooser.view.appearance.custom.CustomCellAppearance(new java.awt.Color(204, 255, 204),
+                    new java.awt.Color(51, 255, 51),
+                    (javax.swing.border.Border)null,
+                    new java.awt.Font("Serif", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(0, 0, 153),
+                    1.0f),
+                new datechooser.view.appearance.custom.CustomCellAppearance(new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(0, 0, 102),
+                    (javax.swing.border.Border)null,
+                    new java.awt.Font("Serif", java.awt.Font.ITALIC, 10),
+                    new java.awt.Color(0, 0, 255),
+                    1.0f),
+                new datechooser.view.appearance.custom.CustomCellAppearance(new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(0, 0, 0),
+                    (javax.swing.border.Border)null,
+                    new java.awt.Font("Serif", java.awt.Font.BOLD, 12),
+                    new java.awt.Color(0, 0, 255),
+                    1.0f),
+                new datechooser.view.appearance.custom.CustomCellAppearance(new java.awt.Color(255, 255, 255),
+                    new java.awt.Color(255, 0, 0),
+                    (javax.swing.border.Border)null,
+                    new java.awt.Font("Serif", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(255, 0, 0),
+                    0.7f),
+                (datechooser.view.BackRenderer)null,
+                true,
+                true),
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(0, 0, 0),
@@ -419,9 +573,23 @@ int yy;
                 (datechooser.view.BackRenderer)null,
                 false,
                 true)));
-    dateChooserCombo1.setFormat(1);
+    dateChooserCombo1.setCalendarBackground(new java.awt.Color(255, 255, 255));
+    dateChooserCombo1.setNothingAllowed(false);
+    dateChooserCombo1.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
     dateChooserCombo1.setFieldFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
-    dateChooserCombo1.setLocale(new java.util.Locale("ru", "", ""));
+    dateChooserCombo1.setLocale(new java.util.Locale("ru", "RU", ""));
+    dateChooserCombo1.setNavigateFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+    dateChooserCombo1.setCurrentNavigateIndex(0);
+    dateChooserCombo1.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+        public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+            dateChooserCombo1OnSelectionChange(evt);
+        }
+    });
+    dateChooserCombo1.addCommitListener(new datechooser.events.CommitListener() {
+        public void onCommit(datechooser.events.CommitEvent evt) {
+            dateChooserCombo1OnCommit(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
     jPanel17.setLayout(jPanel17Layout);
@@ -431,34 +599,37 @@ int yy;
             .addContainerGap()
             .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
+                    .addComponent(txt_student_name)
                     .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(txt_student_last_name)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(68, Short.MAX_VALUE))
     );
     jPanel17Layout.setVerticalGroup(
         jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel17Layout.createSequentialGroup()
             .addGap(28, 28, 28)
-            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txt_student_last_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txt_student_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
             .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(dateChooserCombo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel17Layout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel13))
+                .addGroup(jPanel17Layout.createSequentialGroup()
+                    .addGap(9, 9, 9)
+                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(13, Short.MAX_VALUE))
@@ -469,7 +640,7 @@ int yy;
     jScrollPane29.setBackground(new java.awt.Color(255, 255, 255));
     jScrollPane29.setBorder(null);
 
-    jTable29.setModel(new javax.swing.table.DefaultTableModel(
+    table_student.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
             {null, null, null, null},
             {null, null, null, null},
@@ -480,8 +651,13 @@ int yy;
             "Title 1", "Title 2", "Title 3", "Title 4"
         }
     ));
-    jTable29.setGridColor(new java.awt.Color(255, 255, 255));
-    jScrollPane29.setViewportView(jTable29);
+    table_student.setGridColor(new java.awt.Color(255, 255, 255));
+    table_student.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            table_studentMouseClicked(evt);
+        }
+    });
+    jScrollPane29.setViewportView(table_student);
 
     txt_header30.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
     txt_header30.setForeground(new java.awt.Color(34, 41, 50));
@@ -489,8 +665,21 @@ int yy;
 
     jSeparator119.setBackground(new java.awt.Color(1, 198, 83));
 
-    txt_gorup_search1.setText("Поиск");
-    txt_gorup_search1.setBorder(null);
+    txt_search_student.setText("Поиск");
+    txt_search_student.setBorder(null);
+    txt_search_student.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txt_search_studentFocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txt_search_studentFocusLost(evt);
+        }
+    });
+    txt_search_student.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txt_search_studentKeyReleased(evt);
+        }
+    });
 
     lbl_cmd_search_gorup1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/Search-30.png"))); // NOI18N
 
@@ -511,7 +700,7 @@ int yy;
                     .addComponent(lbl_cmd_search_gorup1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txt_gorup_search1)
+                        .addComponent(txt_search_student)
                         .addGroup(jPanel11Layout.createSequentialGroup()
                             .addComponent(jSeparator119)
                             .addContainerGap())))))
@@ -524,7 +713,7 @@ int yy;
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addComponent(lbl_cmd_search_gorup1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_gorup_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txt_search_student, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSeparator119, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
@@ -576,54 +765,6 @@ int yy;
     );
 
     jgroup1.add(pnl_new_student);
-
-    pnl_header4.setBackground(new java.awt.Color(0, 157, 65));
-    pnl_header4.setPreferredSize(new java.awt.Dimension(453, 206));
-
-    lbl_exit_5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-    lbl_exit_5.setForeground(new java.awt.Color(57, 113, 177));
-    lbl_exit_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/1495903985_Gnome-Window-Close-32.png"))); // NOI18N
-    lbl_exit_5.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            lbl_exit_5MouseClicked(evt);
-        }
-    });
-
-    lbl_logo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/1495925307_SEO_WEB_analytics.png"))); // NOI18N
-
-    lbl_logoName4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-    lbl_logoName4.setForeground(new java.awt.Color(255, 255, 255));
-    lbl_logoName4.setText("AnalyticToo");
-
-    javax.swing.GroupLayout pnl_header4Layout = new javax.swing.GroupLayout(pnl_header4);
-    pnl_header4.setLayout(pnl_header4Layout);
-    pnl_header4Layout.setHorizontalGroup(
-        pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_header4Layout.createSequentialGroup()
-            .addGap(119, 119, 119)
-            .addComponent(lbl_logo4)
-            .addGap(18, 18, 18)
-            .addComponent(lbl_logoName4)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbl_exit_5)
-            .addGap(21, 21, 21))
-    );
-    pnl_header4Layout.setVerticalGroup(
-        pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(pnl_header4Layout.createSequentialGroup()
-            .addGroup(pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnl_header4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lbl_exit_5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnl_header4Layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addGroup(pnl_header4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnl_header4Layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(lbl_logoName4))
-                        .addComponent(lbl_logo4, javax.swing.GroupLayout.Alignment.TRAILING))))
-            .addContainerGap(64, Short.MAX_VALUE))
-    );
 
     javax.swing.GroupLayout pnl_studentLayout = new javax.swing.GroupLayout(pnl_student);
     pnl_student.setLayout(pnl_studentLayout);
@@ -730,7 +871,7 @@ int yy;
                             .addGap(16, 16, 16)
                             .addComponent(lbl_logoName))
                         .addComponent(lbl_logo, javax.swing.GroupLayout.Alignment.TRAILING))))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
             .addGroup(pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(lbl_cmd_header_button_create)
                 .addComponent(lbl_cmd_header_buttonNew)))
@@ -924,8 +1065,7 @@ int yy;
                     .addContainerGap()
                     .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGap(7, 7, 7)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -944,7 +1084,7 @@ int yy;
             .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(17, Short.MAX_VALUE))
+            .addContainerGap(118, Short.MAX_VALUE))
         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
 
@@ -1147,7 +1287,6 @@ int yy;
             true)));
 start_finish_date.setCalendarBackground(new java.awt.Color(255, 255, 255));
 start_finish_date.setNothingAllowed(false);
-start_finish_date.setFormat(2);
 start_finish_date.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
 try {
     start_finish_date.setDefaultPeriods(new datechooser.model.multiple.PeriodSet(new datechooser.model.multiple.Period(new java.util.GregorianCalendar(2017, 4, 30),
@@ -1295,38 +1434,21 @@ jPanel6Layout.setHorizontalGroup(
     jLayeredPane1.setLayout(jLayeredPane1Layout);
     jLayeredPane1Layout.setHorizontalGroup(
         jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(pnl_sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGroup(jLayeredPane1Layout.createSequentialGroup()
-            .addComponent(pnl_sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(1160, 1160, 1160))
-        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addComponent(pnl_menu)
-                .addContainerGap()))
+            .addGap(211, 211, 211)
+            .addComponent(pnl_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     jLayeredPane1Layout.setVerticalGroup(
         jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jLayeredPane1Layout.createSequentialGroup()
-            .addComponent(pnl_sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(pnl_menu)
-                .addGap(11, 11, 11)))
+        .addComponent(pnl_sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(pnl_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1349, javax.swing.GroupLayout.PREFERRED_SIZE)
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jLayeredPane1)
-    );
+    getContentPane().add(jLayeredPane1, java.awt.BorderLayout.CENTER);
 
     pack();
+    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -1404,6 +1526,80 @@ jPanel6Layout.setHorizontalGroup(
                 System.exit(0);
     }//GEN-LAST:event_lbl_exit_5MouseClicked
 
+    private void pnl_cmd_add29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_add29MouseClicked
+         db.studentTableInsert(txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());  
+         table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null))); 
+         txt_student_name.setText("Имя");
+         txt_student_last_name.setText("Фамилия");
+    }//GEN-LAST:event_pnl_cmd_add29MouseClicked
+
+    private void txt_student_last_nameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_last_nameFocusGained
+       txt_student_last_name.setText(null);
+    }//GEN-LAST:event_txt_student_last_nameFocusGained
+
+    private void txt_student_last_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_last_nameFocusLost
+      
+    }//GEN-LAST:event_txt_student_last_nameFocusLost
+
+    private void txt_student_nameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_nameFocusGained
+       txt_student_name.setText(null);
+    }//GEN-LAST:event_txt_student_nameFocusGained
+
+    private void txt_student_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_nameFocusLost
+      
+    }//GEN-LAST:event_txt_student_nameFocusLost
+
+    private void table_studentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_studentMouseClicked
+        int row = table_student.getSelectedRow();
+        Integer  table_click = (Integer) (table_student.getModel().getValueAt(row, 0));
+        setValueToField(table_click);
+    }//GEN-LAST:event_table_studentMouseClicked
+
+    private void txt_student_last_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_student_last_nameActionPerformed
+            db.updateTableStudent(studentId,txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());
+            table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));
+            setValueToField(studentId);
+    }//GEN-LAST:event_txt_student_last_nameActionPerformed
+
+    private void txt_student_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_student_nameActionPerformed
+            db.updateTableStudent(studentId,txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());
+            table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));
+            setValueToField(studentId);
+    }//GEN-LAST:event_txt_student_nameActionPerformed
+
+    private void dateChooserCombo1OnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dateChooserCombo1OnSelectionChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateChooserCombo1OnSelectionChange
+
+    private void dateChooserCombo1OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserCombo1OnCommit
+        db.updateTableStudent(studentId,txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());
+        table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null))); 
+    }//GEN-LAST:event_dateChooserCombo1OnCommit
+
+    private void pnl_cmd_clear29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_clear29MouseClicked
+       txt_student_name.setText("Имя");
+       txt_student_last_name.setText("Фамилия");
+       studentId = 0;
+    }//GEN-LAST:event_pnl_cmd_clear29MouseClicked
+
+    private void txt_search_studentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_search_studentFocusGained
+        txt_search_student.setText(null);
+
+    }//GEN-LAST:event_txt_search_studentFocusGained
+
+    private void txt_search_studentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_search_studentFocusLost
+        txt_search_student.setText("Поиск");        
+    }//GEN-LAST:event_txt_search_studentFocusLost
+
+    private void txt_search_studentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_search_studentKeyReleased
+         table_student.setModel(DbUtils.resultSetToTableModel(db.searchStudentInTable(txt_student_last_name.getText(),  null)));
+    }//GEN-LAST:event_txt_search_studentKeyReleased
+
+    private void pnl_new_studentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_new_studentMouseClicked
+        setValueToTableStudent();
+        txt_search_student.setText("Поиск");       
+    }//GEN-LAST:event_pnl_new_studentMouseClicked
+    
      private void setLblColor(JLabel lbl){
         lbl.setBackground(new Color(4,136,58));
     }
@@ -1420,6 +1616,16 @@ jPanel6Layout.setHorizontalGroup(
         lbl.setForeground(new Color(255, 255, 255));
     }
     
+     
+     private void setValueToField(int table_click){
+         Calendar selectDate =  new GregorianCalendar();;
+          txt_student_name.setText(db.getValueFromTableStudent(table_click).get("first_name").toString());
+          txt_student_last_name.setText(db.getValueFromTableStudent(table_click).get("last_name").toString());
+            selectDate.setTime((java.sql.Date) db.getValueFromTableStudent(table_click).get("date_birthday"));
+            dateChooserCombo1.setSelectedDate(selectDate);
+            studentId = (Integer) db.getValueFromTableStudent(table_click).get("id");
+     }
+
     /**
      * @param args the command line arguments
      */
@@ -1453,10 +1659,8 @@ jPanel6Layout.setHorizontalGroup(
       ManagerTools frame = new ManagerTools();
       Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
       frame.setSize (screenSize);
-      frame.setVisible(true);
       frame.setExtendedState(MAXIMIZED_BOTH);
-      frame.setVisible(true);
-                   
+      frame.setVisible(true); 
             }
         });
     }
@@ -1468,8 +1672,6 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1501,13 +1703,11 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JScrollPane jScrollPane29;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator111;
     private javax.swing.JSeparator jSeparator114;
     private javax.swing.JSeparator jSeparator115;
     private javax.swing.JSeparator jSeparator118;
     private javax.swing.JSeparator jSeparator119;
-    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator123;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
@@ -1515,33 +1715,18 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTable27;
     private javax.swing.JTable jTable28;
-    private javax.swing.JTable jTable29;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLayeredPane jgroup;
     private javax.swing.JLayeredPane jgroup1;
     private javax.swing.JLabel lbl_cmd_header_buttonNew;
-    private javax.swing.JLabel lbl_cmd_header_buttonNew1;
-    private javax.swing.JLabel lbl_cmd_header_buttonNew2;
     private javax.swing.JLabel lbl_cmd_header_button_create;
-    private javax.swing.JLabel lbl_cmd_header_button_create1;
-    private javax.swing.JLabel lbl_cmd_header_button_create2;
     private javax.swing.JLabel lbl_cmd_search_gorup;
     private javax.swing.JLabel lbl_cmd_search_gorup1;
     private javax.swing.JLabel lbl_cmd_search_student;
     private javax.swing.JLabel lbl_exit_1;
-    private javax.swing.JLabel lbl_exit_3;
-    private javax.swing.JLabel lbl_exit_4;
     private javax.swing.JLabel lbl_exit_5;
     private javax.swing.JLabel lbl_logo;
-    private javax.swing.JLabel lbl_logo2;
-    private javax.swing.JLabel lbl_logo3;
     private javax.swing.JLabel lbl_logo4;
     private javax.swing.JLabel lbl_logoName;
-    private javax.swing.JLabel lbl_logoName2;
-    private javax.swing.JLabel lbl_logoName3;
     private javax.swing.JLabel lbl_logoName4;
     private javax.swing.JLabel lbl_text_discipline;
     private javax.swing.JLabel lbl_text_lastname_student;
@@ -1557,8 +1742,6 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JPanel pnl_cmd_clear29;
     private javax.swing.JPanel pnl_group;
     private javax.swing.JPanel pnl_header;
-    private javax.swing.JPanel pnl_header2;
-    private javax.swing.JPanel pnl_header3;
     private javax.swing.JPanel pnl_header4;
     private javax.swing.JLayeredPane pnl_menu;
     private javax.swing.JPanel pnl_new_group_1;
@@ -1567,16 +1750,19 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JPanel pnl_sidebar;
     private javax.swing.JPanel pnl_student;
     private datechooser.beans.DateChooserCombo start_finish_date;
+    private javax.swing.JTable table_student;
     private javax.swing.JLabel txt_desc26;
     private javax.swing.JLabel txt_desc27;
     private javax.swing.JTextField txt_gorup_search;
-    private javax.swing.JTextField txt_gorup_search1;
     private javax.swing.JLabel txt_header26;
     private javax.swing.JLabel txt_header27;
     private javax.swing.JLabel txt_header28;
     private javax.swing.JLabel txt_header29;
     private javax.swing.JLabel txt_header30;
     private javax.swing.JLabel txt_header32;
+    private javax.swing.JTextField txt_search_student;
+    private javax.swing.JTextField txt_student_last_name;
+    private javax.swing.JTextField txt_student_name;
     private javax.swing.JTextField txt_student_search;
     // End of variables declaration//GEN-END:variables
 }

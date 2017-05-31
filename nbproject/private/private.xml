@@ -5,7 +5,11 @@
         <group>
             <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/View/TeacherTool.java</file>
             <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/View/ManagerTools.java</file>
+            <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/Model/Tags.java</file>
             <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/View/AuthFrame.java</file>
+            <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/Controller/DBController.java</file>
+            <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/MySQL/javaconnect.java</file>
+            <file>file:/E:/AlexKarlov/Programming/NetBeansProjects/diplom/src/Model/User.java</file>
         </group>
     </open-files>
 </project-private>

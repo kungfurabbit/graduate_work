@@ -33,7 +33,7 @@ int yy;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        sidebar = new javax.swing.JLayeredPane();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         pnl_sidebar = new javax.swing.JPanel();
         menu_item_1 = new javax.swing.JLabel();
         menu_item_2 = new javax.swing.JLabel();
@@ -48,6 +48,15 @@ int yy;
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         pnl_menu = new javax.swing.JLayeredPane();
+        pnl_lessons = new javax.swing.JPanel();
+        pnl_header = new javax.swing.JPanel();
+        lbl_exit_1 = new javax.swing.JLabel();
+        lbl_logo = new javax.swing.JLabel();
+        lbl_logoName = new javax.swing.JLabel();
+        lbl_cmd_header_button_create = new javax.swing.JLabel();
+        lbl_cmd_header_buttonNew = new javax.swing.JLabel();
+        lessons = new javax.swing.JLayeredPane();
+        pnl_lesson_new = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -117,7 +126,7 @@ int yy;
                 .addGap(16, 16, 16)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
         );
 
@@ -162,11 +171,6 @@ int yy;
         pnl_sidebarLayout.setHorizontalGroup(
             pnl_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_sidebarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(menu_item_1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(pnl_sidebarLayout.createSequentialGroup()
                 .addGroup(pnl_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_sidebarLayout.createSequentialGroup()
@@ -180,6 +184,13 @@ int yy;
                         .addGap(16, 16, 16)
                         .addComponent(menu_item_2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnl_sidebarLayout.createSequentialGroup()
+                .addGroup(pnl_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_sidebarLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(menu_item_1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnl_sidebarLayout.setVerticalGroup(
             pnl_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,43 +208,155 @@ int yy;
                 .addComponent(menu_item_1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(menu_item_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        sidebar.setLayer(pnl_sidebar, javax.swing.JLayeredPane.PALETTE_LAYER);
-
-        javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
-        sidebar.setLayout(sidebarLayout);
-        sidebarLayout.setHorizontalGroup(
-            sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        sidebarLayout.setVerticalGroup(
-            sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         pnl_menu.setLayout(new javax.swing.OverlayLayout(pnl_menu));
+
+        pnl_header.setBackground(new java.awt.Color(0, 157, 65));
+        pnl_header.setPreferredSize(new java.awt.Dimension(453, 206));
+
+        lbl_exit_1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_exit_1.setForeground(new java.awt.Color(57, 113, 177));
+        lbl_exit_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/1495903985_Gnome-Window-Close-32.png"))); // NOI18N
+        lbl_exit_1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_exit_1MouseClicked(evt);
+            }
+        });
+
+        lbl_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/1495925307_SEO_WEB_analytics.png"))); // NOI18N
+
+        lbl_logoName.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lbl_logoName.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_logoName.setText("AnalyticToo");
+
+        lbl_cmd_header_button_create.setBackground(new java.awt.Color(0, 157, 65));
+        lbl_cmd_header_button_create.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbl_cmd_header_button_create.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_cmd_header_button_create.setText("Урок/Отметки");
+        lbl_cmd_header_button_create.setOpaque(true);
+        lbl_cmd_header_button_create.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_cmd_header_button_createMouseClicked(evt);
+            }
+        });
+
+        lbl_cmd_header_buttonNew.setBackground(new java.awt.Color(4, 136, 58));
+        lbl_cmd_header_buttonNew.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbl_cmd_header_buttonNew.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_cmd_header_buttonNew.setText("Новый урок");
+        lbl_cmd_header_buttonNew.setOpaque(true);
+        lbl_cmd_header_buttonNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_cmd_header_buttonNewMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_headerLayout = new javax.swing.GroupLayout(pnl_header);
+        pnl_header.setLayout(pnl_headerLayout);
+        pnl_headerLayout.setHorizontalGroup(
+            pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_headerLayout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(lbl_cmd_header_buttonNew)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_cmd_header_button_create)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_headerLayout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(lbl_logo)
+                .addGap(18, 18, 18)
+                .addComponent(lbl_logoName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_exit_1)
+                .addGap(21, 21, 21))
+        );
+        pnl_headerLayout.setVerticalGroup(
+            pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_headerLayout.createSequentialGroup()
+                .addGroup(pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_headerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_exit_1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_headerLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_headerLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(lbl_logoName))
+                            .addComponent(lbl_logo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(pnl_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_cmd_header_button_create)
+                    .addComponent(lbl_cmd_header_buttonNew)))
+        );
+
+        lessons.setLayout(new javax.swing.OverlayLayout(lessons));
+
+        pnl_lesson_new.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnl_lesson_newLayout = new javax.swing.GroupLayout(pnl_lesson_new);
+        pnl_lesson_new.setLayout(pnl_lesson_newLayout);
+        pnl_lesson_newLayout.setHorizontalGroup(
+            pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 675, Short.MAX_VALUE)
+        );
+        pnl_lesson_newLayout.setVerticalGroup(
+            pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 411, Short.MAX_VALUE)
+        );
+
+        lessons.add(pnl_lesson_new);
+
+        javax.swing.GroupLayout pnl_lessonsLayout = new javax.swing.GroupLayout(pnl_lessons);
+        pnl_lessons.setLayout(pnl_lessonsLayout);
+        pnl_lessonsLayout.setHorizontalGroup(
+            pnl_lessonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_header, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+            .addComponent(lessons)
+        );
+        pnl_lessonsLayout.setVerticalGroup(
+            pnl_lessonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_lessonsLayout.createSequentialGroup()
+                .addComponent(pnl_header, 163, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lessons))
+        );
+
+        pnl_menu.add(pnl_lessons);
+
+        jLayeredPane1.setLayer(pnl_sidebar, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane1.setLayer(pnl_menu, javax.swing.JLayeredPane.MODAL_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addComponent(pnl_sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnl_menu)
+                .addContainerGap())
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_menu)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(887, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(212, Short.MAX_VALUE)
-                    .addComponent(pnl_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addComponent(jLayeredPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sidebar)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnl_menu, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLayeredPane1)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -266,6 +389,25 @@ int yy;
     private void menu_item_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_item_1MouseClicked
 
     }//GEN-LAST:event_menu_item_1MouseClicked
+
+    private void lbl_exit_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exit_1MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_lbl_exit_1MouseClicked
+
+    private void lbl_cmd_header_button_createMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cmd_header_button_createMouseClicked
+      /*  setLblColor(lbl_cmd_header_button_create);
+        resetLblColor(lbl_cmd_header_buttonNew);
+        pnl_new_group_1.setVisible(false);
+        pnl_new_group_2.setVisible(true);*/
+    }//GEN-LAST:event_lbl_cmd_header_button_createMouseClicked
+
+    private void lbl_cmd_header_buttonNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cmd_header_buttonNewMouseClicked
+      /*  setLblColor(lbl_cmd_header_buttonNew);
+        resetLblColor(lbl_cmd_header_button_create);
+        pnl_new_group_1.setVisible(true);
+        pnl_new_group_2.setVisible(false);*/
+    }//GEN-LAST:event_lbl_cmd_header_buttonNewMouseClicked
  private void setItemColoer(JLabel lbl){
         lbl.setForeground(new Color(0, 150, 62));
     }
@@ -303,12 +445,12 @@ int yy;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TeacherTool frame = new TeacherTool();
+                TeacherTool Teacherframe = new TeacherTool();
       Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-      frame.setSize (screenSize);
-      frame.setVisible(true);
-      frame.setExtendedState(MAXIMIZED_BOTH);
-      frame.setVisible(true);
+      Teacherframe.setSize (screenSize);
+      Teacherframe.setVisible(true);
+      Teacherframe.setExtendedState(MAXIMIZED_BOTH);
+      Teacherframe.setVisible(true);
             }
         });
     }
@@ -320,14 +462,23 @@ int yy;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel lbl_cmd_header_buttonNew;
+    private javax.swing.JLabel lbl_cmd_header_button_create;
+    private javax.swing.JLabel lbl_exit_1;
+    private javax.swing.JLabel lbl_logo;
+    private javax.swing.JLabel lbl_logoName;
+    private javax.swing.JLayeredPane lessons;
     private javax.swing.JLabel menu_item_1;
     private javax.swing.JLabel menu_item_2;
+    private javax.swing.JPanel pnl_header;
+    private javax.swing.JPanel pnl_lesson_new;
+    private javax.swing.JPanel pnl_lessons;
     private javax.swing.JLayeredPane pnl_menu;
     private javax.swing.JPanel pnl_sidebar;
-    private javax.swing.JLayeredPane sidebar;
     // End of variables declaration//GEN-END:variables
 }
