@@ -32,7 +32,7 @@ public class javaconnect {
          //properties.setProperty("password","mRfg3GVXES54nj");
          properties.setProperty("useUnicode","true");
          properties.setProperty("characterEncoding","UTF-8");
-        Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/financeDB", properties);
+        Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/analytics_storage", properties);
          //Connection conn=DriverManager.getConnection("jdbc:mysql://www.db4free.net:3306/cleanservicedb", properties);
        System.out.println("Connected");
         

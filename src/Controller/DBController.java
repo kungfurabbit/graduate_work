@@ -44,7 +44,7 @@ public void  studentTableInsert(String name, String lastName, Calendar dateBirth
         bDate = new java.sql.Date(date.getTimeInMillis());   
     if (!(name.equals("Имя") )&&(lastName.equals("Фамилия"))){
     try {
-            String sql="INSERT INTO "+tag.DB_NAME+"."+tag.STUDENT_TABLE+"("+tag.STUDENT_NAME+","+tag.STUDENT_LASTNAME+","+tag.STUDENT_DATEBIRTHDAY+" ) "
+            String sql="INSERT INTO "+tag.DB_NAME+"."+tag.STUDENT_TABLE+"("+tag.NAME+","+tag.LASTNAME+","+tag.STUDENT_DATEBIRTHDAY+" ) "
                     + "VALUES('"+name+"', '"+lastName+"', '"+bDate+"')";
             pst =conn.prepareStatement(sql);
             pst.executeUpdate();
@@ -82,7 +82,7 @@ public  void updateTableStudent(int id, String name, String lastName, Calendar b
         bDate = new java.sql.Date(date.getTimeInMillis());  
      try {
             String sql = "UPDATE "+tag.DB_NAME+"."+tag.STUDENT_TABLE+" "
-                    + "set "+tag.STUDENT_NAME+" = '"+name+"', "+tag.STUDENT_LASTNAME+" = '"+lastName+"',"
+                    + "set "+tag.NAME+" = '"+name+"', "+tag.LASTNAME+" = '"+lastName+"',"
                     + " "+tag.STUDENT_DATEBIRTHDAY+" = '"+bDate+"' where id_student = '"+id+"'";
             pst = conn.prepareStatement(sql);
             pst.execute();
@@ -119,7 +119,7 @@ public HashMap getValueFromTableStudent(Integer tableClickId){
 }
 
 public ResultSet searchStudentInTable(String lastName, ResultSet rs){
-    String sql = "SELECT * FROM "+tag.DB_NAME+"."+tag.STUDENT_TABLE+" where "+tag.STUDENT_LASTNAME+" = '"+lastName+"'";
+    String sql = "SELECT * FROM "+tag.DB_NAME+"."+tag.STUDENT_TABLE+" where "+tag.LASTNAME+" = '"+lastName+"'";
     try {
       pst =  conn.prepareStatement(sql);            
             rs=pst.executeQuery(sql);
@@ -128,6 +128,14 @@ public ResultSet searchStudentInTable(String lastName, ResultSet rs){
         }        
         return rs;    
 }
-    
 
+public  ResultSet loadSummaryTable(String sql, ResultSet rs){
+        try {            
+            pst = conn.prepareStatement(sql);            
+            rs = pst.executeQuery(sql);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        }        
+        return rs;
+}
 }

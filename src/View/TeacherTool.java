@@ -57,6 +57,20 @@ int yy;
         lbl_cmd_header_buttonNew = new javax.swing.JLabel();
         lessons = new javax.swing.JLayeredPane();
         pnl_lesson_new = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_lesson = new javax.swing.JTable();
+        txt_student_last_name = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        pnl_cmd_add30 = new javax.swing.JPanel();
+        jLabel70 = new javax.swing.JLabel();
+        pnl_cmd_add31 = new javax.swing.JPanel();
+        jLabel71 = new javax.swing.JLabel();
+        pnl_cmd_add32 = new javax.swing.JPanel();
+        jLabel72 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -297,15 +311,157 @@ int yy;
 
         pnl_lesson_new.setBackground(new java.awt.Color(255, 255, 255));
 
+        table_lesson.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table_lesson);
+
+        txt_student_last_name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_student_last_name.setText("Фамилия");
+        txt_student_last_name.setBorder(null);
+        txt_student_last_name.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_student_last_nameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_student_last_nameFocusLost(evt);
+            }
+        });
+        txt_student_last_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_student_last_nameActionPerformed(evt);
+            }
+        });
+
+        jSeparator3.setBackground(new java.awt.Color(0, 157, 65));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
+        pnl_cmd_add30.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_cmd_add30.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+        pnl_cmd_add30.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_cmd_add30MouseClicked(evt);
+            }
+        });
+
+        jLabel70.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel70.setForeground(new java.awt.Color(0, 157, 65));
+        jLabel70.setText("Добавить");
+        pnl_cmd_add30.add(jLabel70);
+
+        pnl_cmd_add31.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_cmd_add31.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+        pnl_cmd_add31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_cmd_add31MouseClicked(evt);
+            }
+        });
+
+        jLabel71.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel71.setForeground(new java.awt.Color(0, 157, 65));
+        jLabel71.setText("Добавить");
+        pnl_cmd_add31.add(jLabel71);
+
+        pnl_cmd_add32.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_cmd_add32.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+        pnl_cmd_add32.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_cmd_add32MouseClicked(evt);
+            }
+        });
+
+        jLabel72.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(0, 157, 65));
+        jLabel72.setText("Добавить");
+        pnl_cmd_add32.add(jLabel72);
+
         javax.swing.GroupLayout pnl_lesson_newLayout = new javax.swing.GroupLayout(pnl_lesson_new);
         pnl_lesson_new.setLayout(pnl_lesson_newLayout);
         pnl_lesson_newLayout.setHorizontalGroup(
             pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGroup(pnl_lesson_newLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txt_student_last_name, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnl_cmd_add30, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnl_cmd_add32, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_lesson_newLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(pnl_cmd_add31, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnl_lesson_newLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         pnl_lesson_newLayout.setVerticalGroup(
             pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_lesson_newLayout.createSequentialGroup()
+                .addGroup(pnl_lesson_newLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnl_lesson_newLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnl_cmd_add31, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_lesson_newLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(txt_student_last_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addComponent(pnl_cmd_add30, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(pnl_cmd_add32, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         lessons.add(pnl_lesson_new);
@@ -314,7 +470,7 @@ int yy;
         pnl_lessons.setLayout(pnl_lessonsLayout);
         pnl_lessonsLayout.setHorizontalGroup(
             pnl_lessonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_header, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+            .addComponent(pnl_header, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
             .addComponent(lessons)
         );
         pnl_lessonsLayout.setVerticalGroup(
@@ -322,7 +478,7 @@ int yy;
             .addGroup(pnl_lessonsLayout.createSequentialGroup()
                 .addComponent(pnl_header, 163, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lessons))
+                .addComponent(lessons, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
         );
 
         pnl_menu.add(pnl_lessons);
@@ -343,7 +499,7 @@ int yy;
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_menu)
+            .addComponent(pnl_menu, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -408,6 +564,43 @@ int yy;
         pnl_new_group_1.setVisible(true);
         pnl_new_group_2.setVisible(false);*/
     }//GEN-LAST:event_lbl_cmd_header_buttonNewMouseClicked
+
+    private void txt_student_last_nameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_last_nameFocusGained
+        txt_student_last_name.setText(null);
+    }//GEN-LAST:event_txt_student_last_nameFocusGained
+
+    private void txt_student_last_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_last_nameFocusLost
+
+    }//GEN-LAST:event_txt_student_last_nameFocusLost
+
+    private void txt_student_last_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_student_last_nameActionPerformed
+        
+    }//GEN-LAST:event_txt_student_last_nameActionPerformed
+
+    private void pnl_cmd_add30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_add30MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnl_cmd_add30MouseClicked
+
+    private void pnl_cmd_add31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_add31MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnl_cmd_add31MouseClicked
+
+    private void pnl_cmd_add32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_add32MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnl_cmd_add32MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    /*    int[] selectedRows = table.getSelectedRows();
+                    for(int i = 0; i < selectedRows.length; i++) {
+                         int selIndex = selectedRows[i];
+                         TableModel model = table.getModel();
+                         Object value = model.getValueAt(selIndex, 0);
+                         result = result + value;
+                         if(i != selectedRows.length — 1) {
+                               result += ", ";
+                         }
+                    }*/
+    }//GEN-LAST:event_jTable1MouseClicked
  private void setItemColoer(JLabel lbl){
         lbl.setForeground(new Color(0, 150, 62));
     }
@@ -445,12 +638,7 @@ int yy;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TeacherTool Teacherframe = new TeacherTool();
-      Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-      Teacherframe.setSize (screenSize);
-      Teacherframe.setVisible(true);
-      Teacherframe.setExtendedState(MAXIMIZED_BOTH);
-      Teacherframe.setVisible(true);
+
             }
         });
     }
@@ -460,13 +648,22 @@ int yy;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbl_cmd_header_buttonNew;
     private javax.swing.JLabel lbl_cmd_header_button_create;
     private javax.swing.JLabel lbl_exit_1;
@@ -475,10 +672,15 @@ int yy;
     private javax.swing.JLayeredPane lessons;
     private javax.swing.JLabel menu_item_1;
     private javax.swing.JLabel menu_item_2;
+    private javax.swing.JPanel pnl_cmd_add30;
+    private javax.swing.JPanel pnl_cmd_add31;
+    private javax.swing.JPanel pnl_cmd_add32;
     private javax.swing.JPanel pnl_header;
     private javax.swing.JPanel pnl_lesson_new;
     private javax.swing.JPanel pnl_lessons;
     private javax.swing.JLayeredPane pnl_menu;
     private javax.swing.JPanel pnl_sidebar;
+    private javax.swing.JTable table_lesson;
+    private javax.swing.JTextField txt_student_last_name;
     // End of variables declaration//GEN-END:variables
 }

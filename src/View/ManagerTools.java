@@ -5,7 +5,8 @@
  */
 package View;
 
-import Controller.DBController;
+import Controller.DBControllerGroup;
+import Controller.DBControllerStudent;
 import Model.Tags;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -24,6 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -33,24 +36,29 @@ import net.proteanit.sql.DbUtils;
 public class ManagerTools extends javax.swing.JFrame {
 int xx;
 int yy;
-DBController db;
+DBControllerStudent db;
+DBControllerGroup dbg;
 Tags tag;
 protected  int studentId = 0;
+ ArrayList<String> s = new ArrayList<String>();
     /**
      * Creates new form ManagerTools
      */
     public ManagerTools() {
-        initComponents();     
-               pnl_new_group_1.setVisible(false);  
-               pnl_new_group_2.setVisible(false); 
-               db = new DBController();
+        initComponents();
+               pnl_new_group_1.setVisible(false);
+               pnl_new_group_2.setVisible(false);
+               db = new DBControllerStudent();
+               dbg = new DBControllerGroup();
                tag = new Tags();
                setValueToTableStudent();
     }
 private void setValueToTableStudent(){
-     table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));     
+     table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));
 }
-    
+private void setValueToTableGroupStudent(){
+               table_group.setModel(DbUtils.resultSetToTableModel(dbg.loadStudentGroupClear(null)));
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,25 +124,19 @@ private void setValueToTableStudent(){
         pnl_new_group_2 = new javax.swing.JPanel();
         txt_header27 = new javax.swing.JLabel();
         jSeparator115 = new javax.swing.JSeparator();
-        jPanel7 = new javax.swing.JPanel();
-        pnl_cmd_clear27 = new javax.swing.JPanel();
-        jLabel64 = new javax.swing.JLabel();
-        pnl_cmd_add27 = new javax.swing.JPanel();
-        jLabel65 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane28 = new javax.swing.JScrollPane();
-        jTable28 = new javax.swing.JTable();
+        table_group = new javax.swing.JTable();
         txt_header29 = new javax.swing.JLabel();
-        jSeparator118 = new javax.swing.JSeparator();
-        txt_gorup_search = new javax.swing.JTextField();
-        lbl_cmd_search_gorup = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        lbl_text_name_student = new javax.swing.JLabel();
-        lbl_text_lastname_student = new javax.swing.JLabel();
-        lbl_text_discipline = new javax.swing.JLabel();
-        lbl_text_teacher = new javax.swing.JLabel();
-        txt_student_search = new javax.swing.JTextField();
-        lbl_cmd_search_student = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_student_forGroup = new javax.swing.JTable();
+        jPanel7 = new javax.swing.JPanel();
+        pnl_cmd_clear28 = new javax.swing.JPanel();
+        jLabel66 = new javax.swing.JLabel();
+        pnl_cmd_add28 = new javax.swing.JPanel();
+        jLabel67 = new javax.swing.JLabel();
+        choice_group = new java.awt.Choice();
+        txt_header31 = new javax.swing.JLabel();
         pnl_new_group_1 = new javax.swing.JPanel();
         txt_header26 = new javax.swing.JLabel();
         txt_desc26 = new javax.swing.JLabel();
@@ -153,7 +155,6 @@ private void setValueToTableStudent(){
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         start_finish_date = new datechooser.beans.DateChooserCombo();
-        jSeparator1 = new javax.swing.JSeparator();
         choiceTeacher = new java.awt.Choice();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -310,7 +311,7 @@ private void setValueToTableStudent(){
                 .addComponent(menu_item_1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(menu_item_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -691,12 +692,13 @@ private void setValueToTableStudent(){
             .addGap(19, 19, 19)
             .addComponent(txt_header30, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-            .addGap(22, 22, 22)
+        .addGroup(jPanel11Layout.createSequentialGroup()
+            .addGap(30, 30, 30)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createSequentialGroup()
-                    .addGap(8, 8, 8)
+                    .addComponent(jScrollPane29, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                    .addContainerGap())
+                .addGroup(jPanel11Layout.createSequentialGroup()
                     .addComponent(lbl_cmd_search_gorup1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -716,9 +718,9 @@ private void setValueToTableStudent(){
                 .addComponent(txt_search_student, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSeparator119, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jScrollPane29, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(44, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout pnl_new_studentLayout = new javax.swing.GroupLayout(pnl_new_student);
@@ -741,8 +743,9 @@ private void setValueToTableStudent(){
                     .addGroup(pnl_new_studentLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(23, 23, 23))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     pnl_new_studentLayout.setVerticalGroup(
         pnl_new_studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -761,7 +764,9 @@ private void setValueToTableStudent(){
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(127, 127, 127))
-        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(pnl_new_studentLayout.createSequentialGroup()
+            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jgroup1.add(pnl_new_student);
@@ -774,7 +779,7 @@ private void setValueToTableStudent(){
             .addContainerGap()
             .addGroup(pnl_studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jgroup1, javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(pnl_header4, javax.swing.GroupLayout.DEFAULT_SIZE, 1131, Short.MAX_VALUE))
+                .addComponent(pnl_header4, javax.swing.GroupLayout.DEFAULT_SIZE, 1122, Short.MAX_VALUE))
             .addContainerGap())
     );
     pnl_studentLayout.setVerticalGroup(
@@ -887,54 +892,12 @@ private void setValueToTableStudent(){
 
     jSeparator115.setBackground(new java.awt.Color(1, 198, 83));
 
-    jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-
-    pnl_cmd_clear27.setBackground(new java.awt.Color(255, 255, 255));
-    pnl_cmd_clear27.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
-
-    jLabel64.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-    jLabel64.setForeground(new java.awt.Color(0, 157, 65));
-    jLabel64.setText("Отмена");
-    pnl_cmd_clear27.add(jLabel64);
-
-    pnl_cmd_add27.setBackground(new java.awt.Color(255, 255, 255));
-    pnl_cmd_add27.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
-
-    jLabel65.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-    jLabel65.setForeground(new java.awt.Color(0, 157, 65));
-    jLabel65.setText("Добавить");
-    pnl_cmd_add27.add(jLabel65);
-
-    javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-    jPanel7.setLayout(jPanel7Layout);
-    jPanel7Layout.setHorizontalGroup(
-        jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-            .addContainerGap(21, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addComponent(pnl_cmd_clear27, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                    .addComponent(pnl_cmd_add27, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18))))
-    );
-    jPanel7Layout.setVerticalGroup(
-        jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_cmd_clear27, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(30, 30, 30)
-            .addComponent(pnl_cmd_add27, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())
-    );
-
     jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
     jScrollPane28.setBackground(new java.awt.Color(255, 255, 255));
     jScrollPane28.setBorder(null);
 
-    jTable28.setModel(new javax.swing.table.DefaultTableModel(
+    table_group.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
             {null, null, null, null},
             {null, null, null, null},
@@ -945,101 +908,114 @@ private void setValueToTableStudent(){
             "Title 1", "Title 2", "Title 3", "Title 4"
         }
     ));
-    jTable28.setGridColor(new java.awt.Color(255, 255, 255));
-    jScrollPane28.setViewportView(jTable28);
+    table_group.setGridColor(new java.awt.Color(255, 255, 255));
+    jScrollPane28.setViewportView(table_group);
 
     txt_header29.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
     txt_header29.setForeground(new java.awt.Color(34, 41, 50));
-    txt_header29.setText("Список групп");
-
-    jSeparator118.setBackground(new java.awt.Color(1, 198, 83));
-
-    txt_gorup_search.setText("Поиск");
-    txt_gorup_search.setBorder(null);
-
-    lbl_cmd_search_gorup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/Search-30.png"))); // NOI18N
+    txt_header29.setText(" Список групп студентов");
 
     javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
     jPanel9.setLayout(jPanel9Layout);
     jPanel9Layout.setHorizontalGroup(
         jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel9Layout.createSequentialGroup()
-            .addGap(19, 19, 19)
-            .addComponent(txt_header29, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(txt_header29, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addComponent(jScrollPane28, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
-        .addComponent(jSeparator118)
-        .addGroup(jPanel9Layout.createSequentialGroup()
-            .addComponent(lbl_cmd_search_gorup)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(txt_gorup_search, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE))
     );
     jPanel9Layout.setVerticalGroup(
         jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel9Layout.createSequentialGroup()
-            .addContainerGap()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txt_header29)
-            .addGap(18, 18, 18)
-            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(lbl_cmd_search_gorup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_gorup_search, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(4, 4, 4)
-            .addComponent(jSeparator118, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
+
+    table_student_forGroup.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null}
+        },
+        new String [] {
+            "Title 1", "Title 2", "Title 3", "Title 4"
+        }
+    ));
+    table_student_forGroup.setGridColor(new java.awt.Color(255, 255, 255));
+    table_student_forGroup.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            table_student_forGroupMouseClicked(evt);
+        }
+    });
+    jScrollPane1.setViewportView(table_student_forGroup);
+
+    jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+    pnl_cmd_clear28.setBackground(new java.awt.Color(255, 255, 255));
+    pnl_cmd_clear28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+    pnl_cmd_clear28.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            pnl_cmd_clear28MouseClicked(evt);
+        }
+    });
+
+    jLabel66.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    jLabel66.setForeground(new java.awt.Color(0, 157, 65));
+    jLabel66.setText("Отмена");
+    pnl_cmd_clear28.add(jLabel66);
+
+    pnl_cmd_add28.setBackground(new java.awt.Color(255, 255, 255));
+    pnl_cmd_add28.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 157, 65), 1, true));
+    pnl_cmd_add28.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            pnl_cmd_add28MouseClicked(evt);
+        }
+    });
+
+    jLabel67.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    jLabel67.setForeground(new java.awt.Color(0, 157, 65));
+    jLabel67.setText("Добавить");
+    pnl_cmd_add28.add(jLabel67);
+
+    javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+    jPanel7.setLayout(jPanel7Layout);
+    jPanel7Layout.setHorizontalGroup(
+        jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel7Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(pnl_cmd_clear28, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(88, 88, 88)
+            .addComponent(pnl_cmd_add28, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(100, Short.MAX_VALUE))
+    );
+    jPanel7Layout.setVerticalGroup(
+        jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel7Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnl_cmd_add28, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnl_cmd_clear28, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
-    jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+    choice_group.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            choice_groupMouseClicked(evt);
+        }
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            choice_groupMouseReleased(evt);
+        }
+    });
 
-    lbl_text_name_student.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-    lbl_text_name_student.setForeground(new java.awt.Color(34, 41, 50));
-    lbl_text_name_student.setText("Имя");
-
-    lbl_text_lastname_student.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-    lbl_text_lastname_student.setForeground(new java.awt.Color(34, 41, 50));
-    lbl_text_lastname_student.setText("Фамилия");
-
-    lbl_text_discipline.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-    lbl_text_discipline.setForeground(new java.awt.Color(34, 41, 50));
-    lbl_text_discipline.setText("Предмет");
-
-    lbl_text_teacher.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-    lbl_text_teacher.setForeground(new java.awt.Color(34, 41, 50));
-    lbl_text_teacher.setText("Учитель");
-
-    javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-    jPanel10.setLayout(jPanel10Layout);
-    jPanel10Layout.setHorizontalGroup(
-        jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel10Layout.createSequentialGroup()
-            .addGap(26, 26, 26)
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lbl_text_discipline, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lbl_text_teacher, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lbl_text_lastname_student)
-                .addComponent(lbl_text_name_student, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(136, Short.MAX_VALUE))
-    );
-    jPanel10Layout.setVerticalGroup(
-        jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel10Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(lbl_text_name_student)
-            .addGap(18, 18, 18)
-            .addComponent(lbl_text_lastname_student)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-            .addComponent(lbl_text_discipline)
-            .addGap(18, 18, 18)
-            .addComponent(lbl_text_teacher)
-            .addGap(33, 33, 33))
-    );
-
-    txt_student_search.setText("Поиск");
-    txt_student_search.setBorder(null);
-
-    lbl_cmd_search_student.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Resources/Search-30.png"))); // NOI18N
+    txt_header31.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+    txt_header31.setForeground(new java.awt.Color(34, 41, 50));
+    txt_header31.setText("Группа");
 
     javax.swing.GroupLayout pnl_new_group_2Layout = new javax.swing.GroupLayout(pnl_new_group_2);
     pnl_new_group_2.setLayout(pnl_new_group_2Layout);
@@ -1047,45 +1023,49 @@ private void setValueToTableStudent(){
         pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(pnl_new_group_2Layout.createSequentialGroup()
             .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_new_group_2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl_cmd_search_student)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(txt_student_search, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(46, 46, 46))
                 .addGroup(pnl_new_group_2Layout.createSequentialGroup()
-                    .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator115, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                    .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(pnl_new_group_2Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(txt_header27, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGap(3, 3, 3))
+                            .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnl_new_group_2Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(txt_header27, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jSeparator115, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnl_new_group_2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_new_group_2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(txt_header31, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(choice_group, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(141, 141, 141)))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(pnl_new_group_2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGap(7, 7, 7)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(91, 91, 91)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(34, Short.MAX_VALUE))
     );
     pnl_new_group_2Layout.setVerticalGroup(
         pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(pnl_new_group_2Layout.createSequentialGroup()
-            .addGap(10, 10, 10)
-            .addComponent(txt_header27)
-            .addGap(15, 15, 15)
-            .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(lbl_cmd_search_student, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_student_search))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jSeparator115, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addContainerGap()
+            .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnl_new_group_2Layout.createSequentialGroup()
+                    .addComponent(txt_header27)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jSeparator115, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(17, 17, 17)
+                    .addGroup(pnl_new_group_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(choice_group, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_header31))
+                    .addGap(88, 88, 88)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(22, 22, 22)
             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(118, Short.MAX_VALUE))
-        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jgroup.setLayer(pnl_new_group_2, javax.swing.JLayeredPane.PALETTE_LAYER);
@@ -1130,7 +1110,7 @@ private void setValueToTableStudent(){
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnl_cmd_clear26, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(pnl_cmd_add26, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(63, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel3Layout.setVerticalGroup(
         jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1175,7 +1155,7 @@ private void setValueToTableStudent(){
             .addGap(19, 19, 19)
             .addComponent(txt_header28, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+        .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
             .addComponent(jSeparator114)
             .addContainerGap())
@@ -1188,7 +1168,7 @@ private void setValueToTableStudent(){
             .addGap(43, 43, 43)
             .addComponent(jSeparator114, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(27, 27, 27)
-            .addComponent(jScrollPane27)
+            .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
             .addContainerGap())
     );
 
@@ -1288,32 +1268,36 @@ private void setValueToTableStudent(){
 start_finish_date.setCalendarBackground(new java.awt.Color(255, 255, 255));
 start_finish_date.setNothingAllowed(false);
 start_finish_date.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
-try {
-    start_finish_date.setDefaultPeriods(new datechooser.model.multiple.PeriodSet(new datechooser.model.multiple.Period(new java.util.GregorianCalendar(2017, 4, 30),
-        new java.util.GregorianCalendar(2017, 4, 30))));
-} catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
-e1.printStackTrace();
-}
 start_finish_date.setFieldFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
 start_finish_date.setLocale(new java.util.Locale("ru", "RU", ""));
 start_finish_date.setNavigateFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
-start_finish_date.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
+start_finish_date.setCurrentNavigateIndex(0);
+start_finish_date.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+    public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+        start_finish_dateOnSelectionChange(evt);
+    }
+    });
+    start_finish_date.addCommitListener(new datechooser.events.CommitListener() {
+        public void onCommit(datechooser.events.CommitEvent evt) {
+            start_finish_dateOnCommit(evt);
+        }
+    });
 
-javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-jPanel6.setLayout(jPanel6Layout);
-jPanel6Layout.setHorizontalGroup(
-    jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    .addGroup(jPanel6Layout.createSequentialGroup()
-        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(start_finish_date, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        .addContainerGap(29, Short.MAX_VALUE))
+    javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+    jPanel6.setLayout(jPanel6Layout);
+    jPanel6Layout.setHorizontalGroup(
+        jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(start_finish_date, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addContainerGap(29, Short.MAX_VALUE))
     );
     jPanel6Layout.setVerticalGroup(
         jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1327,9 +1311,6 @@ jPanel6Layout.setHorizontalGroup(
             .addGap(85, 85, 85))
     );
 
-    jSeparator1.setBackground(new java.awt.Color(1, 198, 83));
-    jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
     jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
     jLabel10.setText("Преподаватель");
 
@@ -1341,37 +1322,31 @@ jPanel6Layout.setHorizontalGroup(
     pnl_new_group_1Layout.setHorizontalGroup(
         pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(pnl_new_group_1Layout.createSequentialGroup()
+            .addContainerGap()
             .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jSeparator111)
-                .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnl_new_group_1Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(txt_header26, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnl_new_group_1Layout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(txt_desc26, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnl_new_group_1Layout.createSequentialGroup()
+                    .addGap(15, 15, 15)
                     .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnl_new_group_1Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(txt_header26, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnl_new_group_1Layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addComponent(txt_desc26, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnl_new_group_1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnl_new_group_1Layout.createSequentialGroup()
-                                    .addGap(15, 15, 15)
-                                    .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(choiceTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel11)
-                                        .addComponent(choiceDescipline, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel10)
+                        .addComponent(choiceTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(26, 26, 26)
+                    .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel11)
+                        .addComponent(choiceDescipline, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(pnl_new_group_1Layout.createSequentialGroup()
-                    .addGap(7, 7, 7)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(38, 38, 38)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator111, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
     );
     pnl_new_group_1Layout.setVerticalGroup(
         pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1380,9 +1355,9 @@ jPanel6Layout.setHorizontalGroup(
             .addComponent(txt_header26)
             .addGap(15, 15, 15)
             .addComponent(txt_desc26)
-            .addGap(15, 15, 15)
-            .addComponent(jSeparator111, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jSeparator111, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(15, 15, 15)
             .addGroup(pnl_new_group_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_new_group_1Layout.createSequentialGroup()
                     .addComponent(jLabel10)
@@ -1392,15 +1367,15 @@ jPanel6Layout.setHorizontalGroup(
                     .addComponent(jLabel11)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(choiceDescipline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(45, 45, 45)
+            .addGap(22, 22, 22)
             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(30, 30, 30)
+            .addGap(27, 27, 27)
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGroup(pnl_new_group_1Layout.createSequentialGroup()
-            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE))
+            .addContainerGap(123, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_new_group_1Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
     );
 
     jgroup.add(pnl_new_group_1);
@@ -1415,7 +1390,7 @@ jPanel6Layout.setHorizontalGroup(
                 .addGroup(pnl_groupLayout.createSequentialGroup()
                     .addComponent(jgroup)
                     .addContainerGap())
-                .addComponent(pnl_header, javax.swing.GroupLayout.DEFAULT_SIZE, 1141, Short.MAX_VALUE)))
+                .addComponent(pnl_header, javax.swing.GroupLayout.DEFAULT_SIZE, 1132, Short.MAX_VALUE)))
     );
     pnl_groupLayout.setVerticalGroup(
         pnl_groupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1461,16 +1436,17 @@ jPanel6Layout.setHorizontalGroup(
 
     private void pnl_groupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_groupMousePressed
 
+
     }//GEN-LAST:event_pnl_groupMousePressed
 
     private void menu_item_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_item_1MousePressed
         setItemColoer(menu_item_1);
-        resetItemColoer(menu_item_2);        
+        resetItemColoer(menu_item_2);
     }//GEN-LAST:event_menu_item_1MousePressed
 
     private void menu_item_2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_item_2MouseReleased
         setItemColoer(menu_item_2);
-        resetItemColoer(menu_item_1);       
+        resetItemColoer(menu_item_1);
     }//GEN-LAST:event_menu_item_2MouseReleased
 
     private void pnl_sidebarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_sidebarMouseDragged
@@ -1487,12 +1463,24 @@ jPanel6Layout.setHorizontalGroup(
     private void menu_item_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_item_1MouseClicked
         pnl_group.setVisible(false);
         pnl_student.setVisible(true);
-        
+
     }//GEN-LAST:event_menu_item_1MouseClicked
 
     private void menu_item_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_item_2MouseClicked
          pnl_group.setVisible(true);
          pnl_student.setVisible(false);
+         pnl_new_group_1.setVisible(true);
+
+
+          int sizeTeacher = dbg.loadToChoice(tag.DB_NAME+"."+tag.TEACHERS_TABLE, tag.LASTNAME+"").size() ;
+           for(int i = 0; i < sizeTeacher; i++){
+               choiceTeacher.addItem(dbg.loadToChoice(tag.DB_NAME+"."+tag.TEACHERS_TABLE, tag.LASTNAME+"").get(i).toString());
+           }
+
+           int sizeDiscipline = dbg.loadToChoice(tag.DB_NAME+"."+tag.DISCIPLINE_TABLE, tag.DISCIPLINE_NAME+"").size() ;
+           for(int i = 0; i < sizeDiscipline; i++){
+               choiceDescipline.addItem(dbg.loadToChoice(tag.DB_NAME+"."+tag.DISCIPLINE_TABLE, tag.DISCIPLINE_NAME+"").get(i).toString());
+           }
     }//GEN-LAST:event_menu_item_2MouseClicked
 
     private void pnl_studentMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_studentMouseDragged
@@ -1508,6 +1496,8 @@ jPanel6Layout.setHorizontalGroup(
         resetLblColor(lbl_cmd_header_button_create);
         pnl_new_group_1.setVisible(true);
         pnl_new_group_2.setVisible(false);
+        pnl_group.setVisible(true);
+
     }//GEN-LAST:event_lbl_cmd_header_buttonNewMouseClicked
 
     private void lbl_cmd_header_button_createMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cmd_header_button_createMouseClicked
@@ -1515,6 +1505,12 @@ jPanel6Layout.setHorizontalGroup(
         resetLblColor(lbl_cmd_header_buttonNew);
         pnl_new_group_1.setVisible(false);
         pnl_new_group_2.setVisible(true);
+        setValueToTableGroupStudent();
+
+          int sizeTeacher = dbg.loadToChoice(tag.DB_NAME+"."+tag.GROUP_TABLE, tag.ID+"").size() ;
+           for(int i = 0; i < sizeTeacher; i++){
+               choice_group.addItem(dbg.loadToChoice(tag.DB_NAME+"."+tag.GROUP_TABLE, tag.ID+"").get(i).toString());
+           }
     }//GEN-LAST:event_lbl_cmd_header_button_createMouseClicked
 
     private void lbl_exit_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exit_1MouseClicked
@@ -1527,8 +1523,8 @@ jPanel6Layout.setHorizontalGroup(
     }//GEN-LAST:event_lbl_exit_5MouseClicked
 
     private void pnl_cmd_add29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_add29MouseClicked
-         db.studentTableInsert(txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());  
-         table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null))); 
+         db.studentTableInsert(txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());
+         table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));
          txt_student_name.setText("Имя");
          txt_student_last_name.setText("Фамилия");
     }//GEN-LAST:event_pnl_cmd_add29MouseClicked
@@ -1538,7 +1534,7 @@ jPanel6Layout.setHorizontalGroup(
     }//GEN-LAST:event_txt_student_last_nameFocusGained
 
     private void txt_student_last_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_last_nameFocusLost
-      
+
     }//GEN-LAST:event_txt_student_last_nameFocusLost
 
     private void txt_student_nameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_nameFocusGained
@@ -1546,13 +1542,14 @@ jPanel6Layout.setHorizontalGroup(
     }//GEN-LAST:event_txt_student_nameFocusGained
 
     private void txt_student_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_student_nameFocusLost
-      
+
     }//GEN-LAST:event_txt_student_nameFocusLost
 
     private void table_studentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_studentMouseClicked
         int row = table_student.getSelectedRow();
         Integer  table_click = (Integer) (table_student.getModel().getValueAt(row, 0));
         setValueToField(table_click);
+
     }//GEN-LAST:event_table_studentMouseClicked
 
     private void txt_student_last_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_student_last_nameActionPerformed
@@ -1573,7 +1570,7 @@ jPanel6Layout.setHorizontalGroup(
 
     private void dateChooserCombo1OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserCombo1OnCommit
         db.updateTableStudent(studentId,txt_student_name.getText(), txt_student_last_name.getText(),dateChooserCombo1.getSelectedDate());
-        table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null))); 
+        table_student.setModel(DbUtils.resultSetToTableModel(db.loadTable(tag.DB_NAME+"."+tag.STUDENT_TABLE, null)));
     }//GEN-LAST:event_dateChooserCombo1OnCommit
 
     private void pnl_cmd_clear29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_clear29MouseClicked
@@ -1588,7 +1585,7 @@ jPanel6Layout.setHorizontalGroup(
     }//GEN-LAST:event_txt_search_studentFocusGained
 
     private void txt_search_studentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_search_studentFocusLost
-        txt_search_student.setText("Поиск");        
+        txt_search_student.setText("Поиск");
     }//GEN-LAST:event_txt_search_studentFocusLost
 
     private void txt_search_studentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_search_studentKeyReleased
@@ -1597,26 +1594,70 @@ jPanel6Layout.setHorizontalGroup(
 
     private void pnl_new_studentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_new_studentMouseClicked
         setValueToTableStudent();
-        txt_search_student.setText("Поиск");       
+        txt_search_student.setText("Поиск");
     }//GEN-LAST:event_pnl_new_studentMouseClicked
-    
+
+    private void start_finish_dateOnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_start_finish_dateOnCommit
+
+    }//GEN-LAST:event_start_finish_dateOnCommit
+
+    private void start_finish_dateOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_start_finish_dateOnSelectionChange
+
+    }//GEN-LAST:event_start_finish_dateOnSelectionChange
+
+    private void pnl_cmd_add28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_add28MouseClicked
+       int[] selectedRows = table_student_forGroup.getSelectedRows();
+                    for(int i = 0; i < selectedRows.length; i++) {
+                         int selIndex = selectedRows[i];
+                         TableModel model = table_student_forGroup.getModel();
+                         Object value = model.getValueAt(selIndex, 0);
+                        s.add((String) value.toString());
+                    }
+        JOptionPane.showMessageDialog(rootPane, s.toString());
+    }//GEN-LAST:event_pnl_cmd_add28MouseClicked
+
+    private void table_student_forGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_student_forGroupMouseClicked
+
+    }//GEN-LAST:event_table_student_forGroupMouseClicked
+
+    private void choice_groupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_choice_groupMouseClicked
+
+    }//GEN-LAST:event_choice_groupMouseClicked
+
+    private void choice_groupMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_choice_groupMouseReleased
+        String id = choice_group.getSelectedItem();
+        JOptionPane.showMessageDialog(rootPane, id.toString());
+        table_group.setModel(DbUtils.resultSetToTableModel(dbg.loadStudentGroup(id, null)));
+
+    }//GEN-LAST:event_choice_groupMouseReleased
+
+    private void pnl_cmd_clear28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_cmd_clear28MouseClicked
+        String idGroup = choice_group.getSelectedItem();
+        for(int i=0; i<s.size(); i++){
+            dbg.studentTableInsert(idGroup, s.get(i));
+        }
+        
+        s.clear();
+               table_group.setModel(DbUtils.resultSetToTableModel(dbg.loadStudentGroupClear(null)));
+    }//GEN-LAST:event_pnl_cmd_clear28MouseClicked
+
      private void setLblColor(JLabel lbl){
         lbl.setBackground(new Color(4,136,58));
     }
-    
+
      private void resetLblColor(JLabel lbl){
         lbl.setBackground(new Color(0,157,65));
     }
-    
+
     private void setItemColoer(JLabel lbl){
         lbl.setForeground(new Color(166, 166, 166));
     }
-    
+
      private void resetItemColoer(JLabel lbl){
         lbl.setForeground(new Color(255, 255, 255));
     }
-    
-     
+
+
      private void setValueToField(int table_click){
          Calendar selectDate =  new GregorianCalendar();;
           txt_student_name.setText(db.getValueFromTableStudent(table_click).get("first_name").toString());
@@ -1633,11 +1674,11 @@ jPanel6Layout.setHorizontalGroup(
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Windows classic".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -1656,11 +1697,7 @@ jPanel6Layout.setHorizontalGroup(
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-      ManagerTools frame = new ManagerTools();
-      Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-      frame.setSize (screenSize);
-      frame.setExtendedState(MAXIMIZED_BOTH);
-      frame.setVisible(true); 
+
             }
         });
     }
@@ -1668,6 +1705,7 @@ jPanel6Layout.setHorizontalGroup(
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choiceDescipline;
     private java.awt.Choice choiceTeacher;
+    private java.awt.Choice choice_group;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1679,8 +1717,8 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
@@ -1688,7 +1726,6 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
@@ -1698,15 +1735,14 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane27;
     private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane29;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator111;
     private javax.swing.JSeparator jSeparator114;
     private javax.swing.JSeparator jSeparator115;
-    private javax.swing.JSeparator jSeparator118;
     private javax.swing.JSeparator jSeparator119;
     private javax.swing.JSeparator jSeparator123;
     private javax.swing.JSeparator jSeparator3;
@@ -1714,31 +1750,24 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTable27;
-    private javax.swing.JTable jTable28;
     private javax.swing.JLayeredPane jgroup;
     private javax.swing.JLayeredPane jgroup1;
     private javax.swing.JLabel lbl_cmd_header_buttonNew;
     private javax.swing.JLabel lbl_cmd_header_button_create;
-    private javax.swing.JLabel lbl_cmd_search_gorup;
     private javax.swing.JLabel lbl_cmd_search_gorup1;
-    private javax.swing.JLabel lbl_cmd_search_student;
     private javax.swing.JLabel lbl_exit_1;
     private javax.swing.JLabel lbl_exit_5;
     private javax.swing.JLabel lbl_logo;
     private javax.swing.JLabel lbl_logo4;
     private javax.swing.JLabel lbl_logoName;
     private javax.swing.JLabel lbl_logoName4;
-    private javax.swing.JLabel lbl_text_discipline;
-    private javax.swing.JLabel lbl_text_lastname_student;
-    private javax.swing.JLabel lbl_text_name_student;
-    private javax.swing.JLabel lbl_text_teacher;
     private javax.swing.JLabel menu_item_1;
     private javax.swing.JLabel menu_item_2;
     private javax.swing.JPanel pnl_cmd_add26;
-    private javax.swing.JPanel pnl_cmd_add27;
+    private javax.swing.JPanel pnl_cmd_add28;
     private javax.swing.JPanel pnl_cmd_add29;
     private javax.swing.JPanel pnl_cmd_clear26;
-    private javax.swing.JPanel pnl_cmd_clear27;
+    private javax.swing.JPanel pnl_cmd_clear28;
     private javax.swing.JPanel pnl_cmd_clear29;
     private javax.swing.JPanel pnl_group;
     private javax.swing.JPanel pnl_header;
@@ -1750,19 +1779,20 @@ jPanel6Layout.setHorizontalGroup(
     private javax.swing.JPanel pnl_sidebar;
     private javax.swing.JPanel pnl_student;
     private datechooser.beans.DateChooserCombo start_finish_date;
+    private javax.swing.JTable table_group;
     private javax.swing.JTable table_student;
+    private javax.swing.JTable table_student_forGroup;
     private javax.swing.JLabel txt_desc26;
     private javax.swing.JLabel txt_desc27;
-    private javax.swing.JTextField txt_gorup_search;
     private javax.swing.JLabel txt_header26;
     private javax.swing.JLabel txt_header27;
     private javax.swing.JLabel txt_header28;
     private javax.swing.JLabel txt_header29;
     private javax.swing.JLabel txt_header30;
+    private javax.swing.JLabel txt_header31;
     private javax.swing.JLabel txt_header32;
     private javax.swing.JTextField txt_search_student;
     private javax.swing.JTextField txt_student_last_name;
     private javax.swing.JTextField txt_student_name;
-    private javax.swing.JTextField txt_student_search;
     // End of variables declaration//GEN-END:variables
 }

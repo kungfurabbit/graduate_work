@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Authorization;
 import static com.sun.org.apache.xerces.internal.util.FeatureState.is;
 import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
 import java.awt.Color;
@@ -58,7 +59,7 @@ int yy;
         txt_login = new javax.swing.JTextField();
         login_separator = new javax.swing.JSeparator();
         password_separator = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txt_pass = new javax.swing.JPasswordField();
         btnSignIn = new java.awt.Button();
         password_label = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -66,8 +67,7 @@ int yy;
         login_label = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocationByPlatform(true);
@@ -127,10 +127,10 @@ int yy;
             }
         });
         txt_login.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 txt_loginCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txt_login.addActionListener(new java.awt.event.ActionListener() {
@@ -146,16 +146,16 @@ int yy;
         password_separator.setBackground(new java.awt.Color(32, 34, 255));
         jPanel2.add(password_separator, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 270, -1));
 
-        jPasswordField1.setBackground(new java.awt.Color(0, 157, 65));
-        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBorder(null);
-        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_pass.setBackground(new java.awt.Color(0, 157, 65));
+        txt_pass.setForeground(new java.awt.Color(255, 255, 255));
+        txt_pass.setText("jPasswordField1");
+        txt_pass.setBorder(null);
+        txt_pass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jPasswordField1FocusGained(evt);
+                txt_passFocusGained(evt);
             }
         });
-        jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 270, 30));
+        jPanel2.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 270, 30));
 
         btnSignIn.setActionCommand("Войти");
         btnSignIn.setBackground(new java.awt.Color(255, 255, 255));
@@ -192,6 +192,7 @@ int yy;
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_loginActionPerformed
@@ -207,6 +208,7 @@ int yy;
         login_separator.setBackground(new Color(255, 255, 255));
         login_label.setForeground(new Color(255, 255, 255));
         password_label.setForeground(new Color(51, 52, 54));
+        txt_login.setForeground(new Color(255, 255, 255));
         
     }//GEN-LAST:event_txt_loginFocusGained
 
@@ -228,18 +230,18 @@ int yy;
         this.setLocation(x-xx, y-yy);
     }//GEN-LAST:event_pnl_overlayMouseDragged
 
-    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
+    private void txt_passFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passFocusGained
         // TODO add your handling code here:
         password_separator.setBackground(new Color(255, 255, 255));
         password_label.setForeground(new Color(255, 255, 255));
        login_label.setForeground(new Color(51, 52, 54));
-       
-    }//GEN-LAST:event_jPasswordField1FocusGained
+       txt_pass.setForeground(new Color(255, 255, 255));
+       txt_pass.setText(null);
+    }//GEN-LAST:event_txt_passFocusGained
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        // TODO add your handling code here:
-        // TimerAnimation();
-
+       Authorization auth = new Authorization();
+       auth.auth(txt_login.getText(), txt_pass.getText());
     }//GEN-LAST:event_btnSignInActionPerformed
 
     
@@ -308,12 +310,12 @@ int yy;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel login_label;
     private javax.swing.JSeparator login_separator;
     private javax.swing.JLabel password_label;
     private javax.swing.JSeparator password_separator;
     private javax.swing.JPanel pnl_overlay;
     private javax.swing.JTextField txt_login;
+    private javax.swing.JPasswordField txt_pass;
     // End of variables declaration//GEN-END:variables
 }
